@@ -1,0 +1,26 @@
+# Environnement Python
+.venv/
+__pycache__/
+*.pyc
+
+# Données de la boutique (clients, pièces d'identité, ventes) : ne jamais publier
+data/
+*.db
+*.db-wal
+*.db-shm
+
+# Fichiers construits : publiés dans les Releases GitHub, pas dans le code
+build/
+dist/
+app/resources/webapp/
+
+# Flutter / Android
+mobile/build/
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/android/.gradle/
+mobile/android/local.properties
+mobile/android/key.properties
+*.jks
+*.keystore

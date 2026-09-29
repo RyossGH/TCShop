@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="TCShop Mobile — caisse, stock et commandes de votre boutique de jeux">
+
+  <!-- iPhone : appli plein écran depuis l'écran d'accueil -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TCShop">
+  <meta name="theme-color" content="#0E1120">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>TCShop</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    html, body { margin: 0; height: 100%; background: #0E1120; }
+    #splash { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center;
+              justify-content: center; color: #8B91B0; font-family: -apple-system, sans-serif; }
+    #splash img { width: 110px; height: 110px; margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <div id="splash"><img src="icons/Icon-192.png" alt=""><div>Chargement de TCShop…</div></div>
+  <script>
+    // mode hors ligne : l'appli est gardée en cache par le téléphone (conventions sans réseau)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js'); });
+      // nouvelle version installée : on recharge une fois pour l'afficher tout de suite
+      var hadController = !!navigator.serviceWorker.controller, reloaded = false;
+      navigator.serviceWorker.addEventListener('controllerchange', function () {
+        if (hadController && !reloaded) { reloaded = true; window.location.reload(); }
+      });
+    }
+    window.addEventListener('flutter-first-frame', function () {
+      var s = document.getElementById('splash'); if (s) s.remove();
+    });
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
